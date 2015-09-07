@@ -1,54 +1,34 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <SceneScript lower="0" upper="0">
-  <SceneObject lower="0" upper="51" language="en" identifier="HappyScene">
-    <SceneTurn lower="21" upper="51" speaker="character">
-      <SceneUttr lower="32" upper="51" punct=".">
-        <SceneWord lower="32" upper="33" text="I"/>
-        <SceneWord lower="34" upper="36" text="am"/>
-        <SceneWord lower="37" upper="42" text="Happy"/>
-        <ActionObject lower="43" upper="50" name="happy">
+  <SceneObject lower="0" upper="44" language="en" identifier="AnnaScene">
+    <SceneTurn lower="20" upper="44" speaker="Anna">
+      <SceneUttr lower="26" upper="44" punct=".">
+        <SceneWord lower="26" upper="27" text="I"/>
+        <SceneWord lower="28" upper="30" text="am"/>
+        <SceneWord lower="31" upper="36" text="Happy"/>
+        <ActionObject lower="37" upper="43" name="wave">
         </ActionObject>
       </SceneUttr>
     </SceneTurn>
   </SceneObject>
-  <SceneObject lower="53" upper="98" language="en" identifier="SadScene">
-    <SceneTurn lower="72" upper="98" speaker="character">
-      <SceneUttr lower="83" upper="98" punct=".">
-        <SceneWord lower="83" upper="84" text="I"/>
-        <SceneWord lower="85" upper="87" text="am"/>
-        <SceneWord lower="88" upper="91" text="Sad"/>
-        <ActionObject lower="92" upper="97" name="sad">
+  <SceneObject lower="46" upper="86" language="en" identifier="BobScene">
+    <SceneTurn lower="65" upper="86" speaker="Bob">
+      <SceneUttr lower="70" upper="86" punct=".">
+        <SceneWord lower="70" upper="71" text="I"/>
+        <SceneWord lower="72" upper="74" text="am"/>
+        <SceneWord lower="75" upper="78" text="Sad"/>
+        <ActionObject lower="79" upper="85" name="wave">
         </ActionObject>
       </SceneUttr>
     </SceneTurn>
   </SceneObject>
-  <SceneObject lower="100" upper="154" language="en" identifier="ScaredScene">
-    <SceneTurn lower="122" upper="154" speaker="character">
-      <SceneUttr lower="133" upper="154" punct=".">
-        <SceneWord lower="133" upper="134" text="I"/>
-        <SceneWord lower="135" upper="137" text="am"/>
-        <SceneWord lower="138" upper="144" text="Scared"/>
-        <ActionObject lower="145" upper="153" name="scared">
-        </ActionObject>
-      </SceneUttr>
-    </SceneTurn>
-  </SceneObject>
-  <SceneObject lower="156" upper="207" language="en" identifier="AngryScene">
-    <SceneTurn lower="177" upper="207" speaker="character">
-      <SceneUttr lower="188" upper="207" punct=".">
-        <SceneWord lower="188" upper="189" text="I"/>
-        <SceneWord lower="190" upper="192" text="am"/>
-        <SceneWord lower="193" upper="198" text="Angry"/>
-        <ActionObject lower="199" upper="206" name="angry">
-        </ActionObject>
-      </SceneUttr>
-    </SceneTurn>
-  </SceneObject>
-  <SceneObject lower="209" upper="253" language="en" identifier="WaveScene">
-    <SceneTurn lower="229" upper="253" speaker="character">
-      <SceneUttr lower="240" upper="253" punct=".">
-        <SceneWord lower="240" upper="245" text="Hello"/>
-        <ActionObject lower="246" upper="252" name="wave">
+  <SceneObject lower="88" upper="137" language="en" identifier="CharlyScene">
+    <SceneTurn lower="110" upper="137" speaker="Charly">
+      <SceneUttr lower="118" upper="137" punct=".">
+        <SceneWord lower="118" upper="119" text="I"/>
+        <SceneWord lower="120" upper="122" text="am"/>
+        <SceneWord lower="123" upper="129" text="Scared"/>
+        <ActionObject lower="130" upper="136" name="wave">
         </ActionObject>
       </SceneUttr>
     </SceneTurn>
