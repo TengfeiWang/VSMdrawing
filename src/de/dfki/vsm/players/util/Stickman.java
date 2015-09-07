@@ -16,6 +16,7 @@ public class Stickman extends JPanel {
     
     private final int     mWidth;
     private final int     mHeight;
+    private final String  mCharacterName;
     
     private int     mPosX;
     private int     mPosY;
@@ -61,8 +62,9 @@ public class Stickman extends JPanel {
     private final Color mForegroundColor    = new Color(188, 188, 188);
     private final Color mBackgroundColor    = new Color(49, 49, 49);
 
-    public Stickman(int width, int height){
+    public Stickman(String name, int width, int height){
         
+        mCharacterName = name;
         mWidth  = width;
         mHeight = height;
         initValues();

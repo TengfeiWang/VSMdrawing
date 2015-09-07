@@ -395,10 +395,7 @@ public class SceneFlowToolBar extends JToolBar implements EventListener {
         // The Play SceneFlow Button
         mPlayButton = add(new AbstractAction() {
             @Override
-            public void actionPerformed(ActionEvent e) {
-                if(mEditorConfig.sLAUNCHPLAYER){                    
-                    SimpleCharacterPlayer.getInstance().launch();
-                }
+            public void actionPerformed(ActionEvent e) {           
                 mEditorInstance.play(mEditorProject);
             }
         });

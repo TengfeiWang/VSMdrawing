@@ -1,12 +1,16 @@
 package de.dfki.vsm.players.util;
  
 import de.dfki.vsm.model.scenescript.ActionObject;
+import de.dfki.vsm.model.scenescript.SceneObject;
+import de.dfki.vsm.model.scenescript.SceneScript;
 import java.awt.*;
 import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.Set;
 import javax.swing.*;
 
  
-public class SimpleCharacterPlayer extends JFrame {
+public final class SimpleCharacterPlayer extends JFrame {
     
     private static SimpleCharacterPlayer instance    = null;
    
@@ -22,26 +26,22 @@ public class SimpleCharacterPlayer extends JFrame {
     
     private final JTextArea mTextArea = new JTextArea();
         
-    ArrayList<Stickman> mCharacterList = new ArrayList<>();
+    private final ArrayList<Stickman> mCharacterList = new ArrayList<>();
+    private final Set<String> mCharacterSet;
    
-    public static SimpleCharacterPlayer getInstance() {
-        if (instance == null) {
-            instance = new SimpleCharacterPlayer();
-        }
-
-        return instance;
-    }
     
-    public SimpleCharacterPlayer() {
-        
+    public SimpleCharacterPlayer(SceneScript scenescript) {
+       
         JFrame frame = new JFrame("Simple Character Player");
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-        
-        mCharacterList.clear();
-        
-        // Add existing characters
-        mCharacterList.add(new Stickman(200,350));
 
+        // Add existing characters
+        mCharacterSet = getCharacters(scenescript);
+        
+        for(String chracterName: mCharacterSet ){
+            mCharacterList.add(new Stickman(chracterName, 200,350));
+        }
+        
         initPanel();
 
         frame.add(mMainPanel);
@@ -129,5 +129,18 @@ public class SimpleCharacterPlayer extends JFrame {
     
     public void displayText(String text){
         mTextArea.setText("\n"+text);
+    }
+    
+    public Set<String> getCharacters(SceneScript scenescript){
+
+        Set<String> speakersSet = new HashSet<>();
+        
+        for(SceneObject scene: scenescript.getSceneList()){
+            speakersSet.add(scene.getTurnList().getFirst().getSpeaker());
+        }
+        
+        System.out.println("there are " + speakersSet.size()+ " characters");
+        
+        return speakersSet;
     }
 }
