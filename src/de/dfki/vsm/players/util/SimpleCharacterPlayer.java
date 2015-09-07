@@ -9,8 +9,8 @@ public class SimpleCharacterPlayer extends JFrame {
     
     private static SimpleCharacterPlayer instance    = null;
    
-    private final int mHeight = 400;
-    private final int mWidth = 400;
+    private final int mHeight = 500;
+    private final int mWidth = 500;
     
     private final Color mForegroundColor = new Color(188, 188, 188);
     private final Color mTextBackgroundColor = new Color(49, 49, 49);
@@ -49,15 +49,15 @@ public class SimpleCharacterPlayer extends JFrame {
        
         mBottomPanel.setLayout(new BoxLayout(mBottomPanel, BoxLayout.X_AXIS));
         mBottomPanel.setBackground(mTextBackgroundColor);   
-        mBottomPanel.setMinimumSize(new Dimension(400, 70));
-        mBottomPanel.setPreferredSize(new Dimension(400, 70));
-        mBottomPanel.setMaximumSize(new Dimension(400, 70));
+        mBottomPanel.setMinimumSize(new Dimension(mWidth, 70));
+        mBottomPanel.setPreferredSize(new Dimension(mWidth, 70));
+        mBottomPanel.setMaximumSize(new Dimension(mWidth, 70));
 
         mTextArea.setBackground(mTextBackgroundColor);
         mTextArea.setForeground(mForegroundColor);
-        mTextArea.setMinimumSize(new Dimension(400, 70));
-        mTextArea.setPreferredSize(new Dimension(400, 70));
-        mTextArea.setMaximumSize(new Dimension(400, 70));
+        mTextArea.setMinimumSize(new Dimension(mWidth, 70));
+        mTextArea.setPreferredSize(new Dimension(mWidth, 70));
+        mTextArea.setMaximumSize(new Dimension(mWidth, 70));
         
         mBottomPanel.add(Box.createRigidArea(new Dimension(20,0)));
         mBottomPanel.add(mTextArea);
