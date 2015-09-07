@@ -22,6 +22,13 @@ public class SimpleCharacterPlayer extends JFrame {
     
     private Stickman mStickman;
    
+    public static SimpleCharacterPlayer getInstance() {
+        if (instance == null) {
+            instance = new SimpleCharacterPlayer();
+        }
+
+        return instance;
+    }
     
     public SimpleCharacterPlayer() {
         
@@ -59,16 +66,6 @@ public class SimpleCharacterPlayer extends JFrame {
         mMainPanel.add(mBottomPanel);
     }
     
-    
-    
-    public static SimpleCharacterPlayer getInstance() {
-        if (instance == null) {
-            instance = new SimpleCharacterPlayer();
-        }
-
-        return instance;
-    }
-    
     public void launch(){
         
         this.setVisible(true);
@@ -77,29 +74,41 @@ public class SimpleCharacterPlayer extends JFrame {
     public void performAction(ActionObject action){
         
         String actionString = ((ActionObject) action).getText();
-        
+        // Here we have to take into account intensity, so we will receive
+        // something like [happy 0.3], we need to find a way to parse this
+        // and send it to Stickman, What about functions taking a parameter (double)?
+        // if no intensity is detected we go for 0.5, do you agree?
+     
+        double instensity = 0.5;
         
         switch(actionString){
             case "[happy]":
-                mStickman.happy();
-              
+                mStickman.happy(instensity);
                 break;
             case "[sad]":
-                mStickman.sad();
+                mStickman.sad(instensity);
                 break;
-            case "[scared]":
-                mStickman.scared();
+            case "[fear]":
+                mStickman.scared(instensity);
                 break;
             case "[angry]":
-             mStickman.angry();
+                mStickman.angry(instensity);
+                break;
+            case "[blush]":
+                mStickman.blush(instensity);
                 break;
             case "[wave]":
-             mStickman.wave();
+                mStickman.wave();
+                break;
+            case "[cup]":
+                mStickman.cup();
+                break;
+            case "[scratch]":
+                mStickman.scratch();
                 break;
             default:
                 break;
         }
-   
     }
     
     public void displayText(String text){

@@ -19,7 +19,6 @@ import javax.swing.JPanel;
 
 public class Stickman extends JPanel {
     
-      
         int     mPosX           = 170;
         int     mPosY           = 60;
         
@@ -131,8 +130,38 @@ public class Stickman extends JPanel {
             } catch (InterruptedException ex) {}
         }
         
+        
+         /**********************************************************************
+         *  EMOTIONS
+         *********************************************************************/
+        
+        public void happy(double intensity){
+           mMood = 1;
+           update();
+        }
+        
+        public void sad(double intensity){
+            mMood = 2;
+            update();
+        }
+        
+        public void scared(double intensity){
+            mMood = 3;
+            update();
+        }
+        
+        public void angry(double intensity){
+            mMood = 4;
+            update();
+        }
+
+        public void blush(double instensity) {
+        }
+        
+        /**********************************************************************
+         *  ACTIONS
+         *********************************************************************/
         public void wave(){
-            
             int x = 100;
             while (x>30) {
 		 mRightArm = new Line2D.Double(mPosX, (mPosY + (mStickHeight/2.3)), (mPosX + x/5 + mStickHeight/4.0), (mPosY + x));
@@ -145,27 +174,11 @@ public class Stickman extends JPanel {
                  x=x+1;
                  update();
             }
-            
-         
         }
-        
-        public void happy(){
-           mMood = 1;
-           update();
+
+        public void cup() {
         }
-        
-        public void sad(){
-            mMood = 2;
-            update();
-        }
-        
-        public void scared(){
-            mMood = 3;
-            update();
-        }
-        
-        public void angry(){
-            mMood = 4;
-            update();
+
+        public void scratch() {
         }
     }
