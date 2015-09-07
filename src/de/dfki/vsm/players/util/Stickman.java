@@ -1,27 +1,33 @@
 package de.dfki.vsm.players.util;
+ 
 
 import java.awt.BasicStroke;
 import java.awt.Color;
-import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.RenderingHints;
 import java.awt.geom.Arc2D;
 import java.awt.geom.Ellipse2D;
 import java.awt.geom.Line2D;
+import java.awt.geom.RoundRectangle2D;
 import javax.swing.JPanel;
 
 public class Stickman extends JPanel {
     
-    private final int     mPosX           = 170;
-    private final int     mPosY           = 60;
-    private final float   mSize           = (float)(0.80);
-    private final float   mHeadSize       = (90 * mSize);
-    private final float   mStickHeight    = (170 * mSize);
-
-    private final Color mForegroundColor    = new Color(188, 188, 188);
-    private final Color mBackgroundColor    = new Color(49, 49, 49);
-
+    private final int     mWidth;
+    private final int     mHeight;
+    
+    private int     mPosX;
+    private int     mPosY;
+    private float   mSize;
+    private float   mHeadSize;
+    private float   mStickHeight;
+    
+    private boolean mSpeakTriggered;
+    private String  mSpeakText;
+    private int     mSpeakText_PosX;
+    private int     mSpeakText_PosY;
+    
     private Ellipse2D   mHead;
 
     private Ellipse2D   mRightEye;
@@ -51,23 +57,44 @@ public class Stickman extends JPanel {
     private int mLeftEye_posX;
     private int mEyes_posY;
     private int mEyesSize;
+    
+    private final Color mForegroundColor    = new Color(188, 188, 188);
+    private final Color mBackgroundColor    = new Color(49, 49, 49);
 
-    public Stickman(){
-        setMinimumSize(new Dimension(400, 300));   
-        setFocusable(true);
-        requestFocusInWindow();
-
+    public Stickman(int width, int height){
+        
+        mWidth  = width;
+        mHeight = height;
+        initValues();
+       
         initCoordinates();
         drawBody();
         drawFace();
+        
+        setFocusable(true);
+        requestFocusInWindow();
     }
 
+    private void initValues()
+    {
+        mPosX           = mWidth/2;
+        mPosY           = (int) (mHeight*.30);
+        mSize           = (float)(0.8);
+        mHeadSize       = (90 * mSize);
+        mStickHeight    = (170 * mSize);
+        mSpeakTriggered = false;
+        mSpeakText      = "";
+        mSpeakText_PosX = 20;
+        mSpeakText_PosY = 30;
+    }            
+            
+            
     @Override
     public void paintComponent(Graphics g) {
 
         setBackground(mBackgroundColor);
         setForeground(mForegroundColor);
-
+        
         super.paintComponent(g);
 
         Graphics2D g2 = (Graphics2D) g;
@@ -85,12 +112,22 @@ public class Stickman extends JPanel {
         g2.draw(mLeftLeg);
         g2.draw(mRightArm);
         g2.draw(mLeftArm);
-
-         g2.setStroke(new BasicStroke(2));
-         g2.setColor(mBackgroundColor);
+          
+        g2.setStroke(new BasicStroke(2));
+        g2.setColor(mBackgroundColor);
         // Draw Face
         g2.draw(mRightEye);
         g2.draw(mLeftEye);
+        
+        if(mSpeakTriggered){
+             g2.setColor(mForegroundColor);
+            g2.fill((new RoundRectangle2D.Double(mSpeakText_PosX-5, mSpeakText_PosY-20, mSpeakText.length()*6.7, 35,  15, 15)));
+            g2.setColor(mBackgroundColor);
+            g2.drawString(mSpeakText, mSpeakText_PosX, mSpeakText_PosY);
+        }
+      
+        
+        
 
         //g2.draw(mRightEyeBrow);
         //g2.draw(mLeftEyeBrow);
@@ -188,16 +225,18 @@ public class Stickman extends JPanel {
     public void wave(){
         int x = 100;
         while (x>30) {
-             mRightArm = new Line2D.Double(mPosX,mArms_Y1, (mPosX + x/5 + mStickHeight/4.0), (mPosY + x));
-             x--;
-             update();
+            mRightArm = new Line2D.Double(mPosX,mArms_Y1, (mPosX + x/5 + mStickHeight/4.0), (mPosY + x));
+            x = x-2;
+            update();
         }
 
         while (x<100) {
-             mRightArm = new Line2D.Double(mPosX,mArms_Y1, (mPosX + x/5 + mStickHeight/4.0), (mPosY + x));
-             x++;
-             update();
+            mRightArm = new Line2D.Double(mPosX,mArms_Y1, (mPosX + x/5 + mStickHeight/4.0), (mPosY + x));
+            x =x+2;
+            update();
         }
+        
+        mSpeakTriggered = false;
     }
 
     public void cup() {
@@ -208,4 +247,17 @@ public class Stickman extends JPanel {
 
     public void blush() {
     }
+    
+    /**********************************************************************
+     *  SPEAK
+     *********************************************************************/
+    
+    public void speak(String msg) {
+        
+        mSpeakText = msg;
+        mSpeakTriggered = true;
+        update();
+        
+    }
+
 }

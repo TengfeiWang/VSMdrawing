@@ -2,6 +2,7 @@ package de.dfki.vsm.players.util;
  
 import de.dfki.vsm.model.scenescript.ActionObject;
 import java.awt.*;
+import java.util.ArrayList;
 import javax.swing.*;
 
  
@@ -16,11 +17,12 @@ public class SimpleCharacterPlayer extends JFrame {
     private final Color mTextBackgroundColor = new Color(49, 49, 49);
     
     private final JPanel mMainPanel = new JPanel();
+    private final JPanel mUpperPanel = new JPanel();
     private final JPanel mBottomPanel = new JPanel();
     
     private final JTextArea mTextArea = new JTextArea();
-    
-    private Stickman mStickman;
+        
+    ArrayList<Stickman> mCharacterList = new ArrayList<>();
    
     public static SimpleCharacterPlayer getInstance() {
         if (instance == null) {
@@ -34,6 +36,11 @@ public class SimpleCharacterPlayer extends JFrame {
         
         JFrame frame = new JFrame("Simple Character Player");
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+        
+        mCharacterList.clear();
+        
+        // Add existing characters
+        mCharacterList.add(new Stickman(200,350));
 
         initPanel();
 
@@ -44,8 +51,10 @@ public class SimpleCharacterPlayer extends JFrame {
     
     private void initPanel(){
         mMainPanel.setLayout(new BoxLayout(mMainPanel, BoxLayout.Y_AXIS)); 
-       
-        mStickman = new Stickman();
+  
+        
+        mUpperPanel.setLayout(new BoxLayout(mUpperPanel, BoxLayout.X_AXIS));
+        mUpperPanel.setBackground(mTextBackgroundColor);  
        
         mBottomPanel.setLayout(new BoxLayout(mBottomPanel, BoxLayout.X_AXIS));
         mBottomPanel.setBackground(mTextBackgroundColor);   
@@ -62,7 +71,11 @@ public class SimpleCharacterPlayer extends JFrame {
         mBottomPanel.add(Box.createRigidArea(new Dimension(20,0)));
         mBottomPanel.add(mTextArea);
         
-        mMainPanel.add(mStickman);     
+        for(Stickman ch: mCharacterList){
+            mUpperPanel.add(ch);  
+        }
+        
+        mMainPanel.add(mUpperPanel);
         mMainPanel.add(mBottomPanel);
     }
     
@@ -78,33 +91,36 @@ public class SimpleCharacterPlayer extends JFrame {
         // something like [happy 0.3], we need to find a way to parse this
         // and send it to Stickman, What about functions taking a parameter (double)?
         // if no intensity is detected we go for 0.5, do you agree?
+        
+        // Now we also need to now which character invokes the action
+        // fot testing purposes I will assume the first character always
      
         double intensity = 0.5;
         
         switch(actionString){
             case "[happy]":
-                mStickman.happy(intensity);
+                mCharacterList.get(0).happy(intensity);
                 break;
             case "[sad]":
-                mStickman.sad(intensity);
+                mCharacterList.get(0).sad(intensity);
                 break;
             case "[fear]":
-                mStickman.scared(intensity);
+                mCharacterList.get(0).scared(intensity);
                 break;
             case "[angry]":
-                mStickman.angry(intensity);
+                mCharacterList.get(0).angry(intensity);
                 break;
             case "[blush]":
-                mStickman.blush();
+                mCharacterList.get(0).blush();
                 break;
             case "[wave]":
-                mStickman.wave();
+                mCharacterList.get(0).wave();
                 break;
             case "[cup]":
-                mStickman.cup();
+                mCharacterList.get(0).cup();
                 break;
             case "[scratch]":
-                mStickman.scratch();
+                mCharacterList.get(0).scratch();
                 break;
             default:
                 break;
