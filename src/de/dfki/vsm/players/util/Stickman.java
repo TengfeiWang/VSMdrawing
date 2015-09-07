@@ -121,16 +121,18 @@ public class Stickman extends JPanel {
         g2.draw(mRightEye);
         g2.draw(mLeftEye);
         
+        // Character Name
+        g2.setColor(Color.red);
+        g2.drawString(mCharacterName, mHead_posX, mHeight-mSpeakText_PosY/3);
+            
+            
         if(mSpeakTriggered){
-             g2.setColor(mForegroundColor);
+            g2.setColor(mForegroundColor);
             g2.fill((new RoundRectangle2D.Double(mSpeakText_PosX-5, mSpeakText_PosY-20, mSpeakText.length()*6.7, 35,  15, 15)));
             g2.setColor(mBackgroundColor);
             g2.drawString(mSpeakText, mSpeakText_PosX, mSpeakText_PosY);
         }
       
-        
-        
-
         //g2.draw(mRightEyeBrow);
         //g2.draw(mLeftEyeBrow);
         //g2.draw(mMouth);
@@ -239,6 +241,7 @@ public class Stickman extends JPanel {
         }
         
         mSpeakTriggered = false;
+        update();
     }
 
     public void cup() {

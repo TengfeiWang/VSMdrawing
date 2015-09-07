@@ -153,6 +153,7 @@ public final class DefaultScenePlayer implements RunTimePlayer {
 
                         // Utterance Visualization
                         mLogger.message("Executing utterance:" + utt.getText());
+                        mCharacterPlayer.speak(speaker, utt.getText());
                         EventDispatcher.getInstance().convey(new UtteranceExecutedEvent(this, utt));
 
                         // Process the words of this utterance
@@ -168,7 +169,7 @@ public final class DefaultScenePlayer implements RunTimePlayer {
                                 mLogger.message("Executing param:" + ((SceneParam) word).getText());
                             } else if (word instanceof ActionObject) {
                                 
-                                mCharacterPlayer.performAction((ActionObject) word);
+                                mCharacterPlayer.performAction(speaker,(ActionObject) word);
 
                                 // Visualization
                                 mLogger.message("Executing action:" + ((ActionObject) word).getText());

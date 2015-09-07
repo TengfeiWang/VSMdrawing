@@ -5,6 +5,7 @@ import de.dfki.vsm.model.scenescript.SceneObject;
 import de.dfki.vsm.model.scenescript.SceneScript;
 import java.awt.*;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Set;
 import javax.swing.*;
@@ -15,7 +16,7 @@ public final class SimpleCharacterPlayer extends JFrame {
     private static SimpleCharacterPlayer instance    = null;
    
     private final int mHeight = 500;
-    private final int mWidth = 500;
+    private final int mWidth = 600;
     
     private final Color mForegroundColor = new Color(188, 188, 188);
     private final Color mTextBackgroundColor = new Color(49, 49, 49);
@@ -26,7 +27,9 @@ public final class SimpleCharacterPlayer extends JFrame {
     
     private final JTextArea mTextArea = new JTextArea();
         
-    private final ArrayList<Stickman> mCharacterList = new ArrayList<>();
+    //private final ArrayList<Stickman> mCharacterList = new ArrayList<>();
+    private final HashMap<String, Stickman> mCharacterList = new HashMap<>();
+    
     private final Set<String> mCharacterSet;
    
     
@@ -39,7 +42,7 @@ public final class SimpleCharacterPlayer extends JFrame {
         mCharacterSet = getCharacters(scenescript);
         
         for(String chracterName: mCharacterSet ){
-            mCharacterList.add(new Stickman(chracterName, 200,350));
+            mCharacterList.put(chracterName,new Stickman(chracterName, 200,350));
         }
         
         initPanel();
@@ -71,9 +74,10 @@ public final class SimpleCharacterPlayer extends JFrame {
         mBottomPanel.add(Box.createRigidArea(new Dimension(20,0)));
         mBottomPanel.add(mTextArea);
         
-        for(Stickman ch: mCharacterList){
+        for(Stickman ch: mCharacterList.values()){
             mUpperPanel.add(ch);  
         }
+        
         
         mMainPanel.add(mUpperPanel);
         mMainPanel.add(mBottomPanel);
@@ -84,7 +88,7 @@ public final class SimpleCharacterPlayer extends JFrame {
         this.setVisible(true);
     }
     
-    public void performAction(ActionObject action){
+    public void performAction(String character, ActionObject action){
         
         String actionString = ((ActionObject) action).getText();
         // Here we have to take into account intensity, so we will receive
@@ -99,32 +103,36 @@ public final class SimpleCharacterPlayer extends JFrame {
         
         switch(actionString){
             case "[happy]":
-                mCharacterList.get(0).happy(intensity);
+                mCharacterList.get(character).happy(intensity);
                 break;
             case "[sad]":
-                mCharacterList.get(0).sad(intensity);
+                mCharacterList.get(character).sad(intensity);
                 break;
             case "[fear]":
-                mCharacterList.get(0).scared(intensity);
+                mCharacterList.get(character).scared(intensity);
                 break;
             case "[angry]":
-                mCharacterList.get(0).angry(intensity);
+                mCharacterList.get(character).angry(intensity);
                 break;
             case "[blush]":
-                mCharacterList.get(0).blush();
+                mCharacterList.get(character).blush();
                 break;
             case "[wave]":
-                mCharacterList.get(0).wave();
+                mCharacterList.get(character).wave();
                 break;
             case "[cup]":
-                mCharacterList.get(0).cup();
+                mCharacterList.get(character).cup();
                 break;
             case "[scratch]":
-                mCharacterList.get(0).scratch();
+                mCharacterList.get(character).scratch();
                 break;
             default:
                 break;
         }
+    }
+    
+    public void speak(String character,String msg){
+        mCharacterList.get(character).speak(msg);
     }
     
     public void displayText(String text){
