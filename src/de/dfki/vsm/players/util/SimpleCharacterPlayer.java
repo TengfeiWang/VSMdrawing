@@ -79,23 +79,23 @@ public class SimpleCharacterPlayer extends JFrame {
         // and send it to Stickman, What about functions taking a parameter (double)?
         // if no intensity is detected we go for 0.5, do you agree?
      
-        double instensity = 0.5;
+        double intensity = 0.5;
         
         switch(actionString){
             case "[happy]":
-                mStickman.happy(instensity);
+                mStickman.happy(intensity);
                 break;
             case "[sad]":
-                mStickman.sad(instensity);
+                mStickman.sad(intensity);
                 break;
             case "[fear]":
-                mStickman.scared(instensity);
+                mStickman.scared(intensity);
                 break;
             case "[angry]":
-                mStickman.angry(instensity);
+                mStickman.angry(intensity);
                 break;
             case "[blush]":
-                mStickman.blush(instensity);
+                mStickman.blush();
                 break;
             case "[wave]":
                 mStickman.wave();
