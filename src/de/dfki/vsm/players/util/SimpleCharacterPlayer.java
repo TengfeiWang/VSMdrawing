@@ -16,7 +16,7 @@ public final class SimpleCharacterPlayer extends JFrame {
     private static SimpleCharacterPlayer instance    = null;
    
     private final int mHeight = 500;
-    private final int mWidth = 600;
+    private final int mWidth = 800;
     
     private final Color mForegroundColor = new Color(188, 188, 188);
     private final Color mTextBackgroundColor = new Color(49, 49, 49);
@@ -114,8 +114,8 @@ public final class SimpleCharacterPlayer extends JFrame {
             case "[angry]":
                 mCharacterList.get(character).angry(intensity);
                 break;
-            case "[blush]":
-                mCharacterList.get(character).blush();
+            case "[box]":
+                mCharacterList.get(character).box();
                 break;
             case "[wave]":
                 mCharacterList.get(character).wave();
